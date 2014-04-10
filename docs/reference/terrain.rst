@@ -287,7 +287,8 @@ by the fact that its ran *after* lettuce run the feature.
 @before.each_scenario
 =====================
 
-This hook is ran before lettuce run each scenario
+This hook is ran before lettuce run each scenario or each example of an
+scenario outline.
 
 The decorated function takes a :ref:`scenario-class` as parameter, so
 that you can use it to fetch steps inside.
@@ -308,7 +309,8 @@ that you can use it to fetch steps inside.
 ====================
 
 This hooks behaves in the same way @before.each_scenario does, except
-by the fact that its ran *after* lettuce run the scenario.
+by the fact that its ran *after* lettuce run the scenario or each example
+of an scenario outline.
 
 .. highlight:: python
 
