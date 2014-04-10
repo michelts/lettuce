@@ -717,7 +717,6 @@ class Scenario(object):
         before_each and after_each callbacks for steps and scenario"""
 
         results = []
-        call_hook('before_each', 'scenario', self)
 
         def run_scenario(almost_self, order=-1, outline=None, run_callbacks=False):
             try:
@@ -747,11 +746,14 @@ class Scenario(object):
 
         if self.outlines:
             for index, outline in enumerate(self.outlines):
+                call_hook('before_each', 'scenario', self)
                 results.append(run_scenario(self, index, outline, run_callbacks=True))
+                call_hook('after_each', 'scenario', self)
         else:
+            call_hook('before_each', 'scenario', self)
             results.append(run_scenario(self, run_callbacks=True))
+            call_hook('after_each', 'scenario', self)
 
-        call_hook('after_each', 'scenario', self)
         return results
 
     def _add_myself_to_steps(self):
