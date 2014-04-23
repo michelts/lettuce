@@ -719,6 +719,8 @@ class Scenario(object):
         results = []
 
         def run_scenario(almost_self, order=-1, outline=None, run_callbacks=False):
+            call_hook('before_each', 'scenario', self)
+
             try:
                 if self.background:
                     self.background.run(ignore_case)
@@ -733,8 +735,12 @@ class Scenario(object):
                     call_hook('outline', 'scenario', self, order, outline,
                             reasons_to_fail)
 
-            skip = lambda x: x not in steps_passed and x not in steps_undefined and x not in steps_failed
+            skip = lambda x: (x not in steps_passed and
+                              x not in steps_undefined and
+                              x not in steps_failed)
             steps_skipped = filter(skip, all_steps)
+
+            call_hook('after_each', 'scenario', self)
 
             return ScenarioResult(
                 self,
@@ -746,13 +752,10 @@ class Scenario(object):
 
         if self.outlines:
             for index, outline in enumerate(self.outlines):
-                call_hook('before_each', 'scenario', self)
-                results.append(run_scenario(self, index, outline, run_callbacks=True))
-                call_hook('after_each', 'scenario', self)
+                results.append(run_scenario(
+                    self, index, outline, run_callbacks=True))
         else:
-            call_hook('before_each', 'scenario', self)
             results.append(run_scenario(self, run_callbacks=True))
-            call_hook('after_each', 'scenario', self)
 
         return results
 
