@@ -62,13 +62,8 @@ def print_scenario_running(scenario):
             # We haven't seen this background before, add our 1st scenario
             world.background_scenario_holder[scenario.background] = scenario
             return
-    if scenario.outlines:
-        if not hasattr(world, 'outlines_scenario_holder'):
-            world.outlines_scenario_holder = []
-        if scenario not in world.outlines_scenario_holder:
-            world.outlines_scenario_holder.append(scenario)
-        else:
-            return
+    if scenario.is_outline and scenario.outline_index > 0:
+        return
     wrt('\n')
     wrt(scenario.represented())
 

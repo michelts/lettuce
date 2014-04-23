@@ -719,6 +719,10 @@ class Scenario(object):
         results = []
 
         def run_scenario(almost_self, order=-1, outline=None, run_callbacks=False):
+            self.outline = outline
+            self.outline_index = order
+            self.is_outline = bool(outline)
+
             call_hook('before_each', 'scenario', self)
 
             try:
