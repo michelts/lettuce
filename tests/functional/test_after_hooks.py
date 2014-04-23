@@ -59,19 +59,19 @@ def run_feature(feature, feature_will_fail, failfast,
 
 @with_setup(prepare_stdout)
 def test_success_outline():
-    run_feature('success_outline', False, False, 1, 1, 24, 3)
+    run_feature('success_outline', False, False, 1, 3, 24, 3)
 
 @with_setup(prepare_stdout)
 def test_success_outline_failfast():
-    run_feature('success_outline', False, True, 1, 1, 24, 3)
+    run_feature('success_outline', False, True, 1, 3, 24, 3)
 
 @with_setup(prepare_stdout)
 def test_fail_outline():
-    run_feature('fail_outline', True, False, 1, 1, 24, 3)
+    run_feature('fail_outline', True, False, 1, 3, 24, 3)
 
 @with_setup(prepare_stdout)
 def test_fail_outline_failfast():
-    run_feature('fail_outline', True, True, 1, 1, 12, 2)
+    run_feature('fail_outline', True, True, 1, 2, 12, 2)
 
 @with_setup(prepare_stdout)
 def test_success_non_outline():
