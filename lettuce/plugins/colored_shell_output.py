@@ -146,6 +146,13 @@ def print_scenario_running(scenario):
             # We haven't seen this background before, add our 1st scenario
             world.background_scenario_holder[scenario.background] = scenario
             return
+    if scenario.outlines:
+        if not hasattr(world, 'outlines_scenario_holder'):
+            world.outlines_scenario_holder = []
+        if scenario not in world.outlines_scenario_holder:
+            world.outlines_scenario_holder.append(scenario)
+        else:
+            return
     string = scenario.represented()
     string = wrap_file_and_line(string, '\033[1;30m', '\033[0m')
     write_out("\n\033[1;37m%s" % string)
