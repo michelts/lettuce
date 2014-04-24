@@ -16,6 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+import logging
 from cStringIO import StringIO
 
 from nose.tools import with_setup, assert_equal
@@ -237,6 +238,12 @@ def test_subunit_output_undefined_steps():
     """
 
     state.expect = [
+        Includes({
+            'status': 'fail',
+            'details': Includes({
+                'steps': ContentContains('? When this test step is undefined\n'),
+            }),
+        }),
         Includes({
             'status': 'fail',
             'details': Includes({
