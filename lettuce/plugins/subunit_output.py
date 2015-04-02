@@ -160,11 +160,11 @@ def enable(filename=None):
 
 def get_test_id(scenario):
     try:
-        return '{feature}: {scenario}'.format(
+        return u'{feature}: {scenario}'.format(
             feature=scenario.feature.name,
             scenario=scenario.name)
     except AttributeError:
-        return '{feature}: Background'.format(
+        return u'{feature}: Background'.format(
             feature=scenario.feature.name)
 
 
